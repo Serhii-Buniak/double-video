@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        body {
+            background-image: url("https://gen.jut.su/chakranature/background_anime_bleach.dark.jpg");
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: auto;
+            background-attachment: fixed;
+            color: whitesmoke;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/instruction.css">
+    <link rel="stylesheet" href="/css/videos.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <title>Double Video</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header__button">
+            <span id="number-decrement">🡸</span>
+        </div>
+        <div class="header__input-wrapper">
+            <input id="episode-input" class="header__input" min="0" max="999" class="" type="number">
+        </div>
+        <div class="header__button">
+           <span id="number-increment"> 🡺</span>
+        </div>
+    </header>
+
+    <menu class="videos">
+        <div class="videos__video-wrapper">
+            <div class="videos__title">
+                <h2>Звук</h2>
+                <div class="videos__subtitle">
+                    <i id='js-sound-file'></i>
+                </div>
+            </div>
+            <video id="sound-video" controls class="videos__video" src=""></video>
+            <div class="video__buttons video__buttons-left">
+                <button onclick="soundPlay()" class="video__button video__button-left">Play</button>
+                <button onclick="soundFullscreen()" class="video__button video__button-left">Fullscreen</button>
+                <button onclick="soundMute()" class="video__button video__button-left">Mute</button>
+            </div>
+        </div>
+        <div class="videos__box">
+            <div><button onclick="bothPlay()" class="video__button video__button-center">Play</button></div>
+            <div><button onclick="ready()"  class="video__button video__button-center">Ready</button></div>
+        </div>
+        <div class="videos__video-wrapper">
+            <div class="videos__title">
+                <h2>Видео</h2>
+                <div class="videos__subtitle">
+                    <i id='js-picture-file'></i>
+                </div>
+            </div>
+            <video id="picture-video" controls class="videos__video" src="/Picture/Bleach_[119]_[AniLibria_TV]_[BDRip_1080p]_x264.mp4"></video>
+           
+            <div class="video__buttons  video__buttons-right">
+                <button onclick="picturePlay()" class="video__button video__button-right">Play</button>
+                <button onclick="pictureFullscreen()" class="video__button video__button-right">Fullscreen</button>
+                <button onclick="pictureMute()" class="video__button video__button-right">Mute</button>
+            </div>
+        </div>
+    </menu>
+
+    <div class="instruction">
+        <div class="instruction__box box__letf">
+            <div class="box__title">
+                <h2>Звук</h2>
+
+            </div>
+            <dl class="box__list">
+                <dt class="list__title">Play & Stop</dt>
+                <dd class="list__description">Shift + Q</dd>
+
+                <dt class="list__title">Fullscreen</dt>
+                <dd class="list__description">Shift + A</dd>
+
+                <dt class="list__title">Mute on/off</dt>
+                <dd class="list__description">Shift + Z</dd>
+            </dl>
+        </div>
+        <div class="instruction__box box__center">
+            <div class="box__title">
+                <h2>Единогласные</h2>
+            </div>
+            <dl class="box__list">
+                <dt class="list__title">Play & Stop</dt>
+                <dd class="list__description">Shift + W</dd>
+
+                <dt class="list__title">Ready</dt>
+                <dd class="list__description">Shift + X</dd>
+            </dl>
+        </div>
+        <div class="instruction__box box__right">
+            <div class="box__title">
+                <h2>Видео</h2>
+              
+            </div>
+            <dl class="box__list">
+                <dt class="list__title">Play & Stop</dt>
+                <dd class="list__description">Shift + E</dd>
+
+                <dt class="list__title">Sound turn off/on</dt>
+                <dd class="list__description">Shift + D</dd>
+
+                <dt class="list__title">Mute on/off</dt>
+                <dd class="list__description">Shift + C</dd>
+            </dl>
+        </div>
+
+    </div>
+    <script src="/js/videoEvents.js"></script>
+    <script src="/js/fileScripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+.instruction {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    &__box {
+        
+        margin: 0 2px;
+        padding: 50px;
+        
+    }
+}
+.box {
+    &__title {
+        font-size: 18px;
+    }
+
+
+    &__list {
+    }
+
+    &__letf {
+        background-color: rgba(12, 15, 20, 0.8);
+    }
+    &__center {
+        background-color: rgba(36, 36, 36, 0.514);
+    }
+
+    &__right {
+        background-color: rgba(14, 9, 17, 0.8);
+    }
+}
+.list {
+    &__title {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    &__description {
+        font-size: 18px;
+        text-indent: 50px;
+    }
+}

@@ -1,0 +1,84 @@
+.videos {
+    margin: 0 0 50px 0;
+    display: flex;
+    justify-content: center;
+
+    &__title {
+        text-align: center;
+        margin: 0 0 10px 0;
+        box-shadow: 0 0 10px;
+        background-color: #000000a4;
+        h2 {
+            text-shadow: -2px -2px 5px #000000;
+        }
+    }
+
+    &__subtitle {
+        margin: 15px 0 0 0;
+        i {
+            text-shadow: -2px -2px 5px #000000;
+        }
+    }
+
+    &__video-wrapper {
+    }
+    &__video {
+        box-shadow: 0 0 10px;
+        width: 800px;
+        opacity: 0.75;
+        &:focus {
+            opacity: 1;
+            box-shadow:none;
+        }
+        &:hover {
+            opacity: 1;
+            box-shadow:none;
+        }
+    }
+
+    &__box {
+        padding: 100px 20px 20px 20px;
+        margin: 0 30px;
+    }
+}
+
+.video {
+    &__buttons {
+    }
+    &__buttons-left {
+        background-color: rgba(12, 15, 20, 0.8);
+    }
+    &__buttons-right {
+        background-color: rgba(14, 9, 17, 0.8);
+    }
+
+    &__button {
+        font-family: inherit;
+        font-size: 15px;
+        color: whitesmoke;
+        padding: 10px 30px;
+        opacity: 0.5;
+        box-shadow: 0 0 10px;
+        &:hover{
+            opacity: 1;
+            box-shadow:none;
+        }
+    }
+
+    &__button-left {
+        background-color: rgb(36, 47, 75);
+    }
+
+    &__button-center {
+        width: 100%;
+        margin: 60px 0 0 0;
+        padding: 30px 80px;
+        text-transform: uppercase;
+        background-color: rgb(73, 73, 73);
+        font-size: 21px;
+    }
+
+    &__button-right {
+        background-color: rgb(50, 30, 59);
+    }
+}
