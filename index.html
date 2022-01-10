@@ -11,6 +11,7 @@
             -webkit-appearance: none;
             margin: 0;
         }
+
         body {
             background-image: url("https://gen.jut.su/chakranature/background_anime_bleach.dark.jpg");
             background-position: top;
@@ -37,7 +38,7 @@
             <input id="episode-input" class="header__input" min="0" max="999" class="" type="number">
         </div>
         <div class="header__button">
-           <span id="number-increment"> 🡺</span>
+            <span id="number-increment"> 🡺</span>
         </div>
     </header>
 
@@ -49,16 +50,16 @@
                     <i id='js-sound-file'></i>
                 </div>
             </div>
-            <video id="sound-video" controls class="videos__video" src=""></video>
+            <video id="sound-video" controls class="videos__video" ></video>
             <div class="video__buttons video__buttons-left">
-                <button onclick="soundPlay()" class="video__button video__button-left">Play</button>
-                <button onclick="soundFullscreen()" class="video__button video__button-left">Fullscreen</button>
-                <button onclick="soundMute()" class="video__button video__button-left">Mute</button>
+                <button id="sound-play" class="video__button video__button-left">Play</button>
+                <button id="sound-fullscreen" class="video__button video__button-left">Fullscreen</button>
+                <button id="sound-mute" class="video__button video__button-left">Mute</button>
             </div>
         </div>
         <div class="videos__box">
-            <div><button onclick="bothPlay()" class="video__button video__button-center">Play</button></div>
-            <div><button onclick="ready()"  class="video__button video__button-center">Ready</button></div>
+            <div><button id="both-play" class="video__button video__button-center">Play</button></div>
+            <div><button id="ready" class="video__button video__button-center">Ready</button></div>
         </div>
         <div class="videos__video-wrapper">
             <div class="videos__title">
@@ -67,12 +68,12 @@
                     <i id='js-picture-file'></i>
                 </div>
             </div>
-            <video id="picture-video" controls class="videos__video" src="/Picture/Bleach_[119]_[AniLibria_TV]_[BDRip_1080p]_x264.mp4"></video>
-           
+            <video id="picture-video" controls class="videos__video"></video>
+
             <div class="video__buttons  video__buttons-right">
-                <button onclick="picturePlay()" class="video__button video__button-right">Play</button>
-                <button onclick="pictureFullscreen()" class="video__button video__button-right">Fullscreen</button>
-                <button onclick="pictureMute()" class="video__button video__button-right">Mute</button>
+                <button id="picture-play"  class="video__button video__button-right">Play</button>
+                <button id="picture-fullscreen" class="video__button video__button-right">Fullscreen</button>
+                <button id="picture-mute" class="video__button video__button-right">Mute</button>
             </div>
         </div>
     </menu>
@@ -109,7 +110,7 @@
         <div class="instruction__box box__right">
             <div class="box__title">
                 <h2>Видео</h2>
-              
+
             </div>
             <dl class="box__list">
                 <dt class="list__title">Play & Stop</dt>
@@ -124,8 +125,14 @@
         </div>
 
     </div>
-    <script src="/js/videoEvents.js"></script>
-    <script src="/js/fileScripts.js"></script>
+    
+    <script type="module" src="/js/proto.js"></script>
+    <script type="module" src="/js/Models/Video.js"></script>
+    <script type="module" src="/js/Models/Episode.js"></script>
+    <script type="module" src="/js/Models/DataContext.js"></script>
+    <script type="module" src="/js/videoEvents.js"></script>
+    <script type="module" src="/js/fileScripts.js"></script>
+
 </body>
 
 </html>
