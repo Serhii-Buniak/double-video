@@ -1,74 +1,85 @@
 import EpisodeRepository from '../Data/EpisodeRepository.js';
-import { displayEpisodeName, displayEpisodeNumber, getInputEpisodeNumberme as getInputEpisodeNumber } from '../Events/EpisodeEvents.js';
+import { displayEpisodeName, displayEpisodeNumber, getInputEpisodeNumber as getInputEpisodeNumber, setFormEvent } from '../Events/EpisodeEvents.js';
+import Episode from '../Models/Episode.js';
 import Video from '../Models/Video.js';
 
 const episodeRepository = new EpisodeRepository;
 
-const pictureVideo = new Video(document.getElementById('picture-video') as HTMLVideoElement, '/Picture/');
-const soundVideo = new Video(document.getElementById('sound-video') as HTMLVideoElement, '/Sound/');
+let pictureVideo = new Video(document.getElementById('picture-video') as HTMLVideoElement, '/Picture');
+let soundVideo = new Video(document.getElementById('sound-video') as HTMLVideoElement, '/Sound');
 
-(function () {
-    pictureVideo.episode = episodeRepository.restoreEpisode({
-        name: 'picture-name',
-        index: 'picture-index',
-        number: 'episode-number'
-    });
-
-    soundVideo.episode = episodeRepository.restoreEpisode({
-        name: 'picture-name',
-        index: 'sound-index',
-        number: 'sound-number'
-    });
-
-    pictureVideo.htmlElement.src = pictureVideo.episodePath;
-    soundVideo.htmlElement.src = soundVideo.episodePath;
-
-    displayEpisodeName('#js-picture-file', pictureVideo.episodePath);
-    displayEpisodeName('#js-sound-file', soundVideo.episodePath);
-    displayEpisodeNumber(pictureVideo.episode.number);
-})();
-
-
-export function onEpisodeChange() {
-    const numberEpisode = getInputEpisodeNumber();
-
-    pictureVideo.episode.number = numberEpisode;
-    soundVideo.episode.number = numberEpisode;
-
-    pictureVideo.htmlElement.src = pictureVideo.episodePath;
-    soundVideo.htmlElement.src = soundVideo.episodePath;
-
-    displayEpisodeName('#js-picture-file', pictureVideo.episode.name);
-    displayEpisodeName('#js-sound-file', soundVideo.episode.name);
-
-    episodeRepository.saveEpisode(pictureVideo.episode, {
-        name: 'picture-name',
-        index: 'picture-index',
-        number: 'episode-number'
-    });
-
-    episodeRepository.saveEpisode(soundVideo.episode, {
-        name: 'sound-name',
-        index: 'sound-index',
-        number: 'episode-number'
-    });
+const pictureKeys: episodeDataKeys = {
+    name: 'picture-name',
+    index: 'picture-index',
+    number: 'episode-number'
+}
+const soundKeys: episodeDataKeys = {
+    name: 'sound-name',
+    index: 'sound-index',
+    number: 'episode-number'
 }
 
+const pictureDisplaySelector: string = '#js-picture-file';
+const soundDisplaySelector: string = '#js-sound-file';
 
+const pictureForm: episodeForm = {
+    name: document.querySelector('#input-picture-name') as HTMLInputElement,
+    index: document.querySelector('#input-picture-index') as HTMLInputElement
+}
+const soundForm: episodeForm = {
+    name: document.querySelector('#input-sound-name') as HTMLInputElement,
+    index: document.querySelector('#input-sound-index') as HTMLInputElement
+};
 
+setFormEvent(pictureForm, pictureKeys, restorePictureEpisode);
+setFormEvent(soundForm, soundKeys, restoreSoundEpisode);
 
+restorePictureEpisode();
+restoreSoundEpisode();
 
-// let formsInputs = [document.querySelector('#input-sound-name'),
-// document.querySelector('#input-sound-index'),
-// document.querySelector('#input-picture-file'),
-// document.querySelector('#input-picture-index')];
-// formsInputs.forEach((el) => {
-//     el?.addEventListener('change', onFileFormChange)
-// })
-// function onFileFormChange() {
+function restorePictureEpisode() {
+    restoreEpisode(pictureVideo, pictureDisplaySelector, pictureKeys, pictureForm);
+}
 
-// }
+function restoreSoundEpisode() {
+    restoreEpisode(soundVideo, soundDisplaySelector, soundKeys, soundForm);
+}
 
+function restoreEpisode(video: Video, displaySelector: string, dataKeys: episodeDataKeys, form: episodeForm) {
+    try {
+        video.episode = episodeRepository.get(dataKeys);
 
-// pictureVideo.episode = new Episode('/Picture/Bleach_[]_[AniLibria_TV]_[BDRip_1080p]_VP8.webm', '/Picture/Bleach_['.length);
-// soundVideo.episode = new Episode('/Sound/Bleach - _VP8_155.webm', '/Sound/Bleach - '.length);
+        video.htmlElement.src = video.episodePath;
+        displayEpisodeName(displaySelector, video.episodePath);
+        displayEpisodeNumber(video.episode.number);
+    } catch (error) {
+        displayEpisodeName(displaySelector, 'None');
+        video.episode = new Episode('', 0, 0);
+    }
+    form.name.value = video.episode.name;
+    form.index.value = video.episode.index.toString();
+
+    video.htmlElement.load();
+}
+
+export function onEpisodeChange() {
+    videoUpdate(pictureVideo, pictureDisplaySelector, pictureKeys);
+    videoUpdate(soundVideo, soundDisplaySelector, soundKeys);
+}
+
+function videoUpdate(video: Video, displaySelector: string, dataKeys: episodeDataKeys) {
+    const numberEpisode = getInputEpisodeNumber();
+    video.episode.number = numberEpisode;
+    video.htmlElement.src = encodeURI(video.episodePath);
+    
+    console.log('=========');
+    console.log(video.episodePath);
+    console.log(encodeURI(video.episodePath));
+    console.log(decodeURI(encodeURI(video.episodePath)));
+    console.log('=========');
+
+    displayEpisodeName(displaySelector, video.episodePath);
+
+    episodeRepository.save(video.episode, dataKeys);
+}
+

@@ -50,7 +50,7 @@
                     <i id='js-sound-file'></i>
                 </div>
             </div>
-            <video id="sound-video" controls class="videos__video" ></video>
+            <video id="sound-video" controls class="videos__video" src=""></video>
             <div class="video__buttons video__buttons-left">
                 <button id="sound-play" class="video__button video__button-left">Play</button>
                 <button id="sound-fullscreen" class="video__button video__button-left">Fullscreen</button>
@@ -68,10 +68,10 @@
                     <i id='js-picture-file'></i>
                 </div>
             </div>
-            <video id="picture-video" controls class="videos__video"></video>
+            <video id="picture-video" controls class="videos__video" src=""></video>
 
             <div class="video__buttons  video__buttons-right">
-                <button id="picture-play"  class="video__button video__button-right">Play</button>
+                <button id="picture-play" class="video__button video__button-right">Play</button>
                 <button id="picture-fullscreen" class="video__button video__button-right">Fullscreen</button>
                 <button id="picture-mute" class="video__button video__button-right">Mute</button>
             </div>
@@ -141,7 +141,7 @@
             </div>
             <fieldset class="setting__input-wrapper">
                 <legend>Имя файла</legend>
-                <input id="input-picture-file" class="setting__input" type="text">
+                <input id="input-picture-name" class="setting__input" type="text">
             </fieldset>
             <fieldset class="setting__input-wrapper">
                 <legend>Индекс номера серии</legend>
@@ -149,13 +149,23 @@
             </fieldset>
         </div>
     </div>
-    
-    <script type="module" src="/js/proto.js"></script>
+
+    <script type="module" src="/js/index.js"></script>
+    <script type="module" src="/js/Controllers/EpisodeController.js"></script>
+    <script type="module" src="/js/Events/EpisodeEvents.js"></script>
+    <script type="module" src="/js/Events/VideoEvents.js"></script>
+
+
+    <script type="module" src="/js/Data/DataContext.js"></script>
+    <script type="module" src="/js/Data/EpisodeRepository.js"></script>
+
     <script type="module" src="/js/Models/Video.js"></script>
     <script type="module" src="/js/Models/Episode.js"></script>
-    <script type="module" src="/js/Models/DataContext.js"></script>
-    <script type="module" src="/js/videoEvents.js"></script>
-    <script type="module" src="/js/fileScripts.js"></script>
+
+
+
+
+
 
 </body>
 

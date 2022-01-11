@@ -1,20 +1,16 @@
 class Episode {
     private _name: string;
     private _index: number;
-    private _number?: number;
+    private _number: number;
 
-    constructor(name: string, index: number, number?: number) {
+    constructor(name: string, index: number, number: number) {
         this._name = name;
         this._index = index;
         this._number = number;
     }
 
     get number(): number {
-        if (this._number !== undefined) {
-            return this._number as number;
-        } else {
-            throw new Error("Episode is undefined")
-        }
+        return this._number;
     }
 
     set number(value: number) {
@@ -22,7 +18,11 @@ class Episode {
     }
 
     get name() {
-        return this._name.insert(this.index, this.number.toString());
+        return this._name;
+    }
+
+    get numeratedName() {
+        return this.name.insert(this.index, this.number.toString());
     }
 
     get index() {

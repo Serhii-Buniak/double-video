@@ -28,17 +28,9 @@ class Video {
         if (!this.folder) {
             throw new Error("Folder is undefined")
         }
-        return this.folder + '/' + this.episode.name;
+        return this.folder + '/' + this.episode.numeratedName;
     }
-    
-    public get episodeIndex() : number {
-        if (!this.folder) {
-            throw new Error("Folder is undefined")
-        }
-        return this.folder.length + this.episode.index;
-    }
-    
-    
+        
     public play() {
         this.htmlElement.play();
     }

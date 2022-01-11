@@ -46,7 +46,7 @@ function ready() {
             isShiftCliked = true;
             setTimeout(() => { isShiftCliked = false; }, 1300);
         }
-        console.log(isShiftCliked + "2");
+        
         if (isShiftCliked) {
             switch (evt.code) {
                 case 'KeyQ':

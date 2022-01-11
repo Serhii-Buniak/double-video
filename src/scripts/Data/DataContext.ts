@@ -5,8 +5,6 @@ class DataContext {
     public contain(key: string) {
 
         let item: string | null = this._localStorage.getItem(key);
-        console.log(item);
-        console.log(!!item);
         return !!item;
     }
 
