@@ -4,12 +4,12 @@ const soundVideo = new Video(document.getElementById('sound-video') as HTMLVideo
 const pictureVideo = new Video(document.getElementById('picture-video') as HTMLVideoElement);
 
 const selectorEventHandlerPairs: { selector: string, handled: EventListenerOrEventListenerObject }[] = [
-    { selector: '#sound-play', handled: () => { soundVideo.switchPlaying } },
-    { selector: '#picture-play', handled: () => { pictureVideo.switchPlaying } },
-    { selector: '#sound-fullscreen', handled: () => { soundVideo.switchFullscreen } },
-    { selector: '#picture-fullscreen', handled: () => { pictureVideo.switchFullscreen } },
-    { selector: '#sound-mute', handled: () => { soundVideo.switchSound } },
-    { selector: '#picture-mute', handled: () => { soundVideo.switchSound } },
+    { selector: '#sound-play', handled: () => { soundVideo.switchPlaying() } },
+    { selector: '#picture-play', handled: () => { pictureVideo.switchPlaying() } },
+    { selector: '#sound-fullscreen', handled: () => { soundVideo.switchFullscreen() } },
+    { selector: '#picture-fullscreen', handled: () => { pictureVideo.switchFullscreen() } },
+    { selector: '#sound-mute', handled: () => { soundVideo.switchSound() } },
+    { selector: '#picture-mute', handled: () => { soundVideo.switchSound() } },
     { selector: '#both-play', handled: bothPlay },
     { selector: '#ready', handled: ready },
 ]
@@ -32,50 +32,50 @@ function bothPlay() {
 
 function ready() {
     soundVideo.unmute();
-    pictureVideo.unmute();
+    pictureVideo.mute();
     pictureVideo.fullscreenOn();
 }
 
-(function () {
-    let isShiftCliked = false;
 
-    document.addEventListener('keyup', (e) => {
-        
-        let evt = (window.event || e) as KeyboardEvent;
-        if (evt.key === 'Shift') {
-            isShiftCliked = true;
-            setTimeout(() => { isShiftCliked = false; }, 1300);
+let isShiftCliked = false;
+
+document.addEventListener('keyup', (e) => {
+
+    let evt = (window.event || e) as KeyboardEvent;
+    if (evt.key === 'Shift') {
+        isShiftCliked = true;
+        setTimeout(() => { isShiftCliked = false; }, 4000);
+        return;
+    }
+
+    if (isShiftCliked) {
+        switch (evt.code) {
+            case 'KeyQ':
+                soundVideo.switchPlaying();
+                break;
+            case 'KeyA':
+                soundVideo.switchFullscreen();
+                break;
+            case 'KeyZ':
+                soundVideo.switchSound()
+                break;
+            case 'KeyW':
+                bothPlay();
+                break;
+            case 'KeyX':
+                ready();
+                break;
+            case 'KeyE':
+                pictureVideo.switchPlaying();
+                break;
+            case 'KeyD':
+                pictureVideo.switchFullscreen();
+                break;
+            case 'KeyC':
+                pictureVideo.switchSound();
+                break;
+            default:
+                isShiftCliked = false;
         }
-        
-        if (isShiftCliked) {
-            switch (evt.code) {
-                case 'KeyQ':
-                    soundVideo.switchPlaying();
-                    break;
-                case 'KeyA':
-                    soundVideo.switchFullscreen();
-                    break;
-                case 'KeyZ':
-                    soundVideo.switchSound()
-                    break;
-                case 'KeyW':
-                    bothPlay();
-                    break;
-                case 'KeyX':
-                    ready();
-                    break;
-                case 'KeyE':
-                    pictureVideo.switchPlaying();
-                    break;
-                case 'KeyW':
-                    pictureVideo.switchFullscreen();
-                    break;
-                case 'KeyC':
-                    pictureVideo.switchSound();
-                    break;
-                default:
-                    isShiftCliked = false;
-            }
-        }
-    })
-})()
+    }
+})

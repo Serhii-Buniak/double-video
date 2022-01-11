@@ -71,12 +71,6 @@ function videoUpdate(video: Video, displaySelector: string, dataKeys: episodeDat
     const numberEpisode = getInputEpisodeNumber();
     video.episode.number = numberEpisode;
     video.htmlElement.src = encodeURI(video.episodePath);
-    
-    console.log('=========');
-    console.log(video.episodePath);
-    console.log(encodeURI(video.episodePath));
-    console.log(decodeURI(encodeURI(video.episodePath)));
-    console.log('=========');
 
     displayEpisodeName(displaySelector, video.episodePath);
 

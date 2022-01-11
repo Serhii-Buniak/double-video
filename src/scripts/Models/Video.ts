@@ -4,16 +4,22 @@ class Video {
     private _episode?: Episode;
     readonly htmlElement: HTMLVideoElement;
     readonly folder?: string;
+    static _isFullScreen: boolean = false;
 
     constructor(htmlElement: HTMLVideoElement, folderPath?: string) {
         this.htmlElement = htmlElement
         this.folder = folderPath;
     }
-    
+
     public set episode(value: Episode) {
         this._episode = value;
 
     }
+
+    static get isFullScreen(): boolean {
+        return Video._isFullScreen;
+    }
+
 
     public get episode(): Episode {
         if (this._episode !== undefined) {
@@ -24,13 +30,13 @@ class Video {
 
     }
 
-    public get episodePath() : string {
+    public get episodePath(): string {
         if (!this.folder) {
             throw new Error("Folder is undefined")
         }
         return this.folder + '/' + this.episode.numeratedName;
     }
-        
+
     public play() {
         this.htmlElement.play();
     }
@@ -50,11 +56,17 @@ class Video {
     public stop() {
         this.htmlElement.pause();
     }
-
+    static fullscreenOff() {
+        document.exitFullscreen();
+        Video._isFullScreen = false;
+    }
     public fullscreenOn() {
-        if (this.htmlElement.requestFullscreen) {
-            this.htmlElement.requestFullscreen();
+        if (Video._isFullScreen) {
+            Video.fullscreenOff();
         }
+        
+        this.htmlElement.requestFullscreen();
+        Video._isFullScreen = true;
     }
 
     public mute() {
@@ -81,7 +93,12 @@ class Video {
         }
     }
     public switchFullscreen() {
-        this.fullscreenOn();
+        if (Video.isFullScreen) {
+            Video.fullscreenOff();
+        }
+        else {
+            this.fullscreenOn();
+        }
     }
 }
 export default Video;
