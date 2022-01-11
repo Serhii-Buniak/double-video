@@ -60,6 +60,20 @@
         <div class="videos__box">
             <div><button id="both-play" class="video__button video__button-center">Play</button></div>
             <div><button id="ready" class="video__button video__button-center">Ready</button></div>
+            <div>
+                <fieldset class="box__fieldset-text">
+                    <legend>Delay</legend>
+                    <input id="delay" class="box__input-text" type="number">
+                </fieldset>
+                <fieldset class="box__fieldset-checbox">
+                    <label class="box__label">Синхронизация видео</label>
+                    <input id="video-sync" class="box__input-checkbox" type="checkbox">
+                </fieldset>
+                <fieldset class="box__fieldset-checbox">
+                    <label class="box__label">Синхронизация аудио</label>
+                    <input id="audio-sync" class="box__input-checkbox" type="checkbox">
+                </fieldset>
+            </div>
         </div>
         <div class="videos__video-wrapper">
             <div class="videos__title">
@@ -68,7 +82,9 @@
                     <i id='js-picture-file'></i>
                 </div>
             </div>
-            <video id="picture-video" controls class="videos__video" src=""></video>
+            <video id="picture-video" controls class="videos__video" src="">
+                <track style="padding: 5px;">
+            </video>
 
             <div class="video__buttons  video__buttons-right">
                 <button id="picture-play" class="video__button video__button-right">Play</button>
@@ -151,13 +167,17 @@
     </div>
 
     <script type="module" src="/js/index.js"></script>
+
     <script type="module" src="/js/Controllers/EpisodeController.js"></script>
+    <script type="module" src="/js/Controllers/VideoController.js"></script>
+
     <script type="module" src="/js/Events/EpisodeEvents.js"></script>
     <script type="module" src="/js/Events/VideoEvents.js"></script>
 
 
     <script type="module" src="/js/Data/DataContext.js"></script>
     <script type="module" src="/js/Data/EpisodeRepository.js"></script>
+    <script type="module" src="/js/Data/VideoRepository.js"></script>
 
     <script type="module" src="/js/Models/Video.js"></script>
     <script type="module" src="/js/Models/Episode.js"></script>

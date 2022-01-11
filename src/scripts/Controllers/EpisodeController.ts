@@ -1,9 +1,11 @@
 import EpisodeRepository from '../Data/EpisodeRepository.js';
+import VideoRepository from '../Data/VideoRepository.js';
 import { displayEpisodeName, displayEpisodeNumber, getInputEpisodeNumber as getInputEpisodeNumber, setFormEvent } from '../Events/EpisodeEvents.js';
 import Episode from '../Models/Episode.js';
 import Video from '../Models/Video.js';
 
 const episodeRepository = new EpisodeRepository;
+const videoRepository = new VideoRepository;
 
 let pictureVideo = new Video(document.getElementById('picture-video') as HTMLVideoElement, '/Picture');
 let soundVideo = new Video(document.getElementById('sound-video') as HTMLVideoElement, '/Sound');
@@ -48,7 +50,6 @@ function restoreSoundEpisode() {
 function restoreEpisode(video: Video, displaySelector: string, dataKeys: episodeDataKeys, form: episodeForm) {
     try {
         video.episode = episodeRepository.get(dataKeys);
-
         video.htmlElement.src = video.episodePath;
         displayEpisodeName(displaySelector, video.episodePath);
         displayEpisodeNumber(video.episode.number);
@@ -58,13 +59,18 @@ function restoreEpisode(video: Video, displaySelector: string, dataKeys: episode
     }
     form.name.value = video.episode.name;
     form.index.value = video.episode.index.toString();
-
-    video.htmlElement.load();
 }
 
 export function onEpisodeChange() {
     videoUpdate(pictureVideo, pictureDisplaySelector, pictureKeys);
     videoUpdate(soundVideo, soundDisplaySelector, soundKeys);
+
+    if (videoRepository.contain('picture-time')) {
+        videoRepository.remove('picture-time');
+    }
+    if (videoRepository.contain('sound-time')) {
+        videoRepository.remove('sound-time');
+    };
 }
 
 function videoUpdate(video: Video, displaySelector: string, dataKeys: episodeDataKeys) {
@@ -73,7 +79,6 @@ function videoUpdate(video: Video, displaySelector: string, dataKeys: episodeDat
     video.htmlElement.src = encodeURI(video.episodePath);
 
     displayEpisodeName(displaySelector, video.episodePath);
-
-    episodeRepository.save(video.episode, dataKeys);
+    episodeRepository.save(dataKeys, video.episode);
 }
 

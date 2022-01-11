@@ -1,9 +1,8 @@
 import Episode from "../Models/Episode.js";
 import DataContext from "./DataContext.js";
 
-
-class EpisodeRepository {
-
+class EpisodeRepository implements Repository {
+    
     private _dataContext = new DataContext;
 
     get(keys: episodeDataKeys) {
@@ -14,10 +13,16 @@ class EpisodeRepository {
         return new Episode(name, index, number);
     }
 
-    save(episode: Episode, keys: episodeDataKeys) {
+    save(keys: episodeDataKeys, episode: Episode) {
         this._dataContext.addOrUpdate(keys.name, episode.name);
         this._dataContext.addOrUpdate(keys.index, episode.index.toString());
         this._dataContext.addOrUpdate(keys.number, episode.number.toString());
+    }
+
+    remove(keys: episodeDataKeys) {
+        this._dataContext.remove(keys.name);
+        this._dataContext.remove(keys.index);
+        this._dataContext.remove(keys.number);   
     }
 }
 

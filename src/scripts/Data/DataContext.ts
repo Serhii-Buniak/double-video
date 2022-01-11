@@ -43,7 +43,7 @@ class DataContext {
     public getValue(key: string): string {
         const value = this._localStorage.getItem(key);
 
-        if (!!value) {
+        if (!!value || value === '') {
             return value as string;
         } else {
             throw new Error('Key not exist')

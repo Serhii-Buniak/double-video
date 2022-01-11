@@ -1,8 +1,11 @@
 import { onEpisodeChange } from "../Controllers/EpisodeController.js";
 import EpisodeRepository from "../Data/EpisodeRepository.js";
+import VideoRepository from "../Data/VideoRepository.js";
 import Episode from "../Models/Episode.js";
 
 const episodeRepository = new EpisodeRepository;
+const videoRepository = new VideoRepository;
+
 const inputEpisode = document.getElementById('episode-input') as HTMLInputElement;
 inputEpisode.addEventListener('change', onEpisodeChange);
 
@@ -35,11 +38,15 @@ export function setFormEvent(form: episodeForm, dataKeys: episodeDataKeys, resto
     for (const key in form) {
         let anyForm = form as any;
         let value = anyForm[key] as HTMLInputElement;
-        
+
         value.addEventListener('change', () => {
-            episodeRepository.save(new Episode(form.name.value, Number(form.index.value), getInputEpisodeNumber()), dataKeys);
+            if(form.name.value === ''){
+                form.name.value = '';
+            }
+            episodeRepository.save(dataKeys, new Episode(form.name.value, Number(form.index.value), getInputEpisodeNumber()));
             restoreFunction();
         });
+
     }
 }
 

@@ -29,17 +29,49 @@
         opacity: 0.8;
         &:focus {
             opacity: 1;
-            box-shadow:none;
+            box-shadow: none;
         }
         &:hover {
             opacity: 1;
-            box-shadow:none;
+            box-shadow: none;
         }
     }
 
     &__box {
         padding: 100px 20px 20px 20px;
         margin: 0 30px;
+    }
+}
+.box {
+    &__fieldset-text {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    &__label {
+        display: block;
+    }
+
+    &__input-text {
+        text-align: center;
+        padding: 5px;
+        font-size: 21px;
+        width: 70px;
+        color: inherit;
+        background-color: rgb(0, 0, 0);
+    }
+
+    &__fieldset-checbox {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 15px;
+        justify-content: center;
+    }
+
+    &__input-checkbox {
+        width: 25px;
+        height: 25px;
     }
 }
 
@@ -60,9 +92,9 @@
         padding: 10px 30px;
         opacity: 0.5;
         box-shadow: 0 0 10px;
-        &:hover{
+        &:hover {
             opacity: 1;
-            box-shadow:none;
+            box-shadow: none;
         }
     }
 
