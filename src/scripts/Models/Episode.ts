@@ -3,9 +3,10 @@ class Episode {
     private _index: number;
     private _number?: number;
 
-    constructor(name: string, index: number) {
+    constructor(name: string, index: number, number?: number) {
         this._name = name;
         this._index = index;
+        this._number = number;
     }
 
     get number(): number {
@@ -21,7 +22,7 @@ class Episode {
     }
 
     get name() {
-        return this._name.insert(this._index, this.number.toString());
+        return this._name.insert(this.index, this.number.toString());
     }
 
     get index() {

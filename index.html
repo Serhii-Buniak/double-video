@@ -79,10 +79,22 @@
     </menu>
 
     <div class="instruction">
+        <div class="instruction__setting setting__left">
+            <div class="box__title">
+                <h2>Файл Звука</h2>
+            </div>
+            <fieldset class="setting__input-wrapper">
+                <legend>Имя файла</legend>
+                <input id="input-sound-name" class="setting__input" type="text">
+            </fieldset>
+            <fieldset class="setting__input-wrapper">
+                <legend>Индекс номера серии</legend>
+                <input id="input-sound-index" class="setting__input" type="number">
+            </fieldset>
+        </div>
         <div class="instruction__box box__letf">
             <div class="box__title">
                 <h2>Звук</h2>
-
             </div>
             <dl class="box__list">
                 <dt class="list__title">Play & Stop</dt>
@@ -123,7 +135,19 @@
                 <dd class="list__description">Shift + C</dd>
             </dl>
         </div>
-
+        <div class="instruction__setting setting__right">
+            <div class="box__title">
+                <h2>Файл Видео</h2>
+            </div>
+            <fieldset class="setting__input-wrapper">
+                <legend>Имя файла</legend>
+                <input id="input-picture-file" class="setting__input" type="text">
+            </fieldset>
+            <fieldset class="setting__input-wrapper">
+                <legend>Индекс номера серии</legend>
+                <input id="input-picture-index" class="setting__input" type="number">
+            </fieldset>
+        </div>
     </div>
     
     <script type="module" src="/js/proto.js"></script>

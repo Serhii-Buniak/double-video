@@ -1,5 +1,4 @@
 /css
 /node_modules
-/js*
+/js
 *.webm
-fileScripts.js

@@ -2,18 +2,21 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    &__box {
-        
+
+    &__setting {
         margin: 0 2px;
-        padding: 50px;
-        
+        padding: 10px;
+    }
+
+    &__box {
+        margin: 0 2px;
+        padding: 30px;
     }
 }
 .box {
     &__title {
         font-size: 18px;
     }
-
 
     &__list {
     }
@@ -29,6 +32,7 @@
         background-color: rgba(14, 9, 17, 0.8);
     }
 }
+
 .list {
     &__title {
         font-size: 18px;
@@ -38,5 +42,27 @@
     &__description {
         font-size: 18px;
         text-indent: 50px;
+    }
+}
+.instruction {
+  
+}
+.setting {
+    &__left {
+        background-color: rgba(12, 15, 20, 0.95);
+    }
+    &__right {
+        background-color: rgba(14, 9, 17, 0.95);
+    }
+    &__input-wrapper {
+        
+    }
+
+    &__input {
+        padding: 5px;
+        font-size: 21px;
+        width: 500px;
+        color:inherit;
+        background-color: rgb(36, 36, 36);
     }
 }
