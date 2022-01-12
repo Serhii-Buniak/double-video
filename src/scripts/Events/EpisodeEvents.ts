@@ -1,53 +1,43 @@
-import { onEpisodeChange } from "../Controllers/EpisodeController.js";
+import { onEpisodeCounterChange as onEpisodeCounterChange, restorePictureEpisode, restoreSoundEpisode } from "../Controllers/EpisodeController.js";
 import EpisodeRepository from "../Data/EpisodeRepository.js";
-import VideoRepository from "../Data/VideoRepository.js";
+import EpisodeForm from "../UI/EpisodeForms/EpisodeForm.js";
 import Episode from "../Models/Episode.js";
+import EpisodeCounter from "../UI/EpisodeCounter.js";
+import PictureEpisodeForm from "../UI/EpisodeForms/PictureEpisodeForm.js";
+import SoundEpisodeForm from "../UI/EpisodeForms/SoundEpisodeForm.js";
+import PictureEpisodeRepository from "../Data/PictureEpisodeRepository.js";
+import SoundEpisodeRepository from "../Data/SoundEpisodeRepository.js";
 
-const episodeRepository = new EpisodeRepository;
-const videoRepository = new VideoRepository;
+const pictureForm: EpisodeForm = new PictureEpisodeForm();
+const soundForm: EpisodeForm = new SoundEpisodeForm();
 
-const inputEpisode = document.getElementById('episode-input') as HTMLInputElement;
-inputEpisode.addEventListener('change', onEpisodeChange);
+const pictureRepository: EpisodeRepository = new PictureEpisodeRepository();
+const soundRepository: EpisodeRepository = new SoundEpisodeRepository();
 
-export function displayEpisodeName(selector: string, path: string) {
-    const placeFilePath = document.querySelector(selector) as HTMLElement;
-    placeFilePath.innerHTML = path;
-}
+const episodeCounter = new EpisodeCounter();
 
-export function displayEpisodeNumber(number: number) {
+episodeCounter.addEventListener('change', onEpisodeCounterChange);
 
-    inputEpisode.value = number.toString();
-}
-
-export function getInputEpisodeNumber() {
-    return Number(inputEpisode.value);
-}
-
-document.getElementById('number-decrement')?.addEventListener('click', () => {
-    inputEpisode.value = (Number(inputEpisode.value) - 1).toString();
-    onEpisodeChange();
+episodeCounter.icrementor.addEventListener('click', () => {
+    episodeCounter.value++;
+    onEpisodeCounterChange();
 })
 
-document.getElementById('number-increment')?.addEventListener('click', () => {
-    inputEpisode.value = (Number(inputEpisode.value) + 1).toString();
-    onEpisodeChange();
+episodeCounter.decrementor.addEventListener('click', () => {
+    episodeCounter.value--;
+    onEpisodeCounterChange();
 })
 
-export function setFormEvent(form: episodeForm, dataKeys: episodeDataKeys, restoreFunction: Function) {
+setFormEvents(pictureForm, pictureRepository, restorePictureEpisode);
+setFormEvents(soundForm, soundRepository, restoreSoundEpisode);
 
-    for (const key in form) {
-        let anyForm = form as any;
-        let value = anyForm[key] as HTMLInputElement;
-
-        value.addEventListener('change', () => {
-            if(form.name.value === ''){
-                form.name.value = '';
-            }
-            episodeRepository.save(dataKeys, new Episode(form.name.value, Number(form.index.value), getInputEpisodeNumber()));
-            restoreFunction();
-        });
-
+function setFormEvents(form: EpisodeForm, repository: EpisodeRepository, restoreEpisode: Function) {
+    const onChange = () => {
+        repository.episode = new Episode(form.name, form.index, episodeCounter.value)
+        restoreEpisode();
     }
+    form.indexAddEventListener('change', onChange);
+    form.nameAddEventListener('change', onChange)
 }
 
 

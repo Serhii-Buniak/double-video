@@ -1,14 +1,15 @@
 import Episode from "./Episode.js";
 
-class Video {
+abstract class Video {
     private _episode?: Episode;
     readonly htmlElement: HTMLVideoElement;
     readonly folder?: string;
     static _isFullScreen: boolean = false;
 
-    constructor(htmlElement: HTMLVideoElement, folderPath?: string) {
+    constructor(htmlElement: HTMLVideoElement, folderPath?: string, episode?: Episode) {
         this.htmlElement = htmlElement
         this.folder = folderPath;
+        this._episode = episode;
     }
 
     public set episode(value: Episode) {
@@ -19,7 +20,6 @@ class Video {
     static get isFullScreen(): boolean {
         return Video._isFullScreen;
     }
-
 
     public get episode(): Episode {
         if (this._episode !== undefined) {
@@ -64,7 +64,7 @@ class Video {
         if (Video._isFullScreen) {
             Video.fullscreenOff();
         }
-        
+
         this.htmlElement.requestFullscreen();
         Video._isFullScreen = true;
     }
@@ -102,3 +102,6 @@ class Video {
     }
 }
 export default Video;
+
+
+

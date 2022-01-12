@@ -1,7 +1,9 @@
+import PictureVideo from '../Models/PictureVideo.js';
+import SoundVideo from '../Models/SoundVideo.js';
 import Video from '../Models/Video.js';
 
-const soundVideo = new Video(document.getElementById('sound-video') as HTMLVideoElement);
-const pictureVideo = new Video(document.getElementById('picture-video') as HTMLVideoElement);
+const soundVideo: Video = new SoundVideo();
+const pictureVideo: Video = new PictureVideo();
 
 const selectorEventHandlerPairs: { selector: string, handled: EventListenerOrEventListenerObject }[] = [
     { selector: '#sound-play', handled: () => { soundVideo.switchPlaying() } },

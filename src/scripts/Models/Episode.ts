@@ -9,16 +9,15 @@ class Episode {
         this._number = number;
     }
 
+    get name() {
+        return this._name;
+    }
+
     get number(): number {
         return this._number;
     }
-
     set number(value: number) {
         this._number = value;
-    }
-
-    get name() {
-        return this._name;
     }
 
     get numeratedName() {
@@ -31,4 +30,5 @@ class Episode {
 }
 
 export default Episode;
+
 

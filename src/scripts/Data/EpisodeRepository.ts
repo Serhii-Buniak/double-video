@@ -1,28 +1,29 @@
 import Episode from "../Models/Episode.js";
 import DataContext from "./DataContext.js";
 
-class EpisodeRepository implements Repository {
-    
-    private _dataContext = new DataContext;
+abstract class EpisodeRepository {
+    protected readonly _dataContext = new DataContext;
 
-    get(keys: episodeDataKeys) {
-        let name = this._dataContext.getValue(keys.name);
-        let index = Number(this._dataContext.getValue(keys.index));
-        let number = Number(this._dataContext.getValue(keys.number));
+    abstract set name(value: string);
+    abstract get name(): string;
 
-        return new Episode(name, index, number);
+    abstract set index(value: number);
+    abstract get index(): number;
+
+    abstract set number(value: number);
+    abstract get number(): number;
+
+    abstract set time(value: number);
+    abstract get time(): number;
+
+    set episode(value: Episode) {
+        this.name = value.name;
+        this.index = value.index;
+        this.number = value.number;
     }
 
-    save(keys: episodeDataKeys, episode: Episode) {
-        this._dataContext.addOrUpdate(keys.name, episode.name);
-        this._dataContext.addOrUpdate(keys.index, episode.index.toString());
-        this._dataContext.addOrUpdate(keys.number, episode.number.toString());
-    }
-
-    remove(keys: episodeDataKeys) {
-        this._dataContext.remove(keys.name);
-        this._dataContext.remove(keys.index);
-        this._dataContext.remove(keys.number);   
+    get episode(): Episode {
+        return new Episode(this.name, this.index, this.number);
     }
 }
 

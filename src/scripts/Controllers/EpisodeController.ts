@@ -1,84 +1,143 @@
 import EpisodeRepository from '../Data/EpisodeRepository.js';
-import VideoRepository from '../Data/VideoRepository.js';
-import { displayEpisodeName, displayEpisodeNumber, getInputEpisodeNumber as getInputEpisodeNumber, setFormEvent } from '../Events/EpisodeEvents.js';
+import PictureEpisodeRepository from '../Data/PictureEpisodeRepository.js';
+import SoundEpisodeRepository from '../Data/SoundEpisodeRepository.js';
+import EpisodeForm from '../UI/EpisodeForms/EpisodeForm.js';
+import PictureEpisodeForm from '../UI/EpisodeForms/PictureEpisodeForm.js';
+import SoundEpisodeForm from '../UI/EpisodeForms/SoundEpisodeForm.js';
 import Episode from '../Models/Episode.js';
+import PictureVideo from '../Models/PictureVideo.js';
+import SoundVideo from '../Models/SoundVideo.js';
 import Video from '../Models/Video.js';
+import VideoTitle from '../UI/VideosTitles/VideoTitle.js';
+import PictureVideoTitle from '../UI/VideosTitles/PictureVideoTitle.js';
+import SoundVideoTitle from '../UI/VideosTitles/SoundVideoTitle.js';
+import EpisodeCounter from '../UI/EpisodeCounter.js';
 
-const episodeRepository = new EpisodeRepository;
-const videoRepository = new VideoRepository;
+const pictureRepository: EpisodeRepository = new PictureEpisodeRepository();
+const soundRepository: EpisodeRepository = new SoundEpisodeRepository();
 
-let pictureVideo = new Video(document.getElementById('picture-video') as HTMLVideoElement, '/Picture');
-let soundVideo = new Video(document.getElementById('sound-video') as HTMLVideoElement, '/Sound');
+const pictureVideo: Video = new PictureVideo();
+const soundVideo: Video = new SoundVideo();
 
-const pictureKeys: episodeDataKeys = {
-    name: 'picture-name',
-    index: 'picture-index',
-    number: 'episode-number'
-}
-const soundKeys: episodeDataKeys = {
-    name: 'sound-name',
-    index: 'sound-index',
-    number: 'episode-number'
-}
+const pictureTitle: VideoTitle = new PictureVideoTitle();
+const soundTitle: VideoTitle = new SoundVideoTitle();
 
-const pictureDisplaySelector: string = '#js-picture-file';
-const soundDisplaySelector: string = '#js-sound-file';
+const pictureForm: EpisodeForm = new PictureEpisodeForm();
+const soundForm: EpisodeForm = new SoundEpisodeForm();
 
-const pictureForm: episodeForm = {
-    name: document.querySelector('#input-picture-name') as HTMLInputElement,
-    index: document.querySelector('#input-picture-index') as HTMLInputElement
-}
-const soundForm: episodeForm = {
-    name: document.querySelector('#input-sound-name') as HTMLInputElement,
-    index: document.querySelector('#input-sound-index') as HTMLInputElement
-};
-
-setFormEvent(pictureForm, pictureKeys, restorePictureEpisode);
-setFormEvent(soundForm, soundKeys, restoreSoundEpisode);
+const episodeCounter = new EpisodeCounter();
 
 restorePictureEpisode();
 restoreSoundEpisode();
 
-function restorePictureEpisode() {
-    restoreEpisode(pictureVideo, pictureDisplaySelector, pictureKeys, pictureForm);
+export function restorePictureEpisode() {
+    restoreEpisode(pictureVideo, pictureRepository, pictureTitle, pictureForm);
 }
 
-function restoreSoundEpisode() {
-    restoreEpisode(soundVideo, soundDisplaySelector, soundKeys, soundForm);
+export function restoreSoundEpisode() {
+    restoreEpisode(soundVideo, soundRepository, soundTitle, soundForm);
 }
 
-function restoreEpisode(video: Video, displaySelector: string, dataKeys: episodeDataKeys, form: episodeForm) {
+function restoreEpisode(video: Video, repository: EpisodeRepository, videoTitle: VideoTitle, form: EpisodeForm) {
     try {
-        video.episode = episodeRepository.get(dataKeys);
+        video.episode = repository.episode;
         video.htmlElement.src = video.episodePath;
-        displayEpisodeName(displaySelector, video.episodePath);
-        displayEpisodeNumber(video.episode.number);
+
+        videoTitle.value = video.episodePath;
+        episodeCounter.value = video.episode.number
+
     } catch (error) {
-        displayEpisodeName(displaySelector, 'None');
+        videoTitle.value = 'None';
         video.episode = new Episode('', 0, 0);
     }
-    form.name.value = video.episode.name;
-    form.index.value = video.episode.index.toString();
+    form.name = video.episode.name;
+    form.index = video.episode.index;
 }
 
-export function onEpisodeChange() {
-    videoUpdate(pictureVideo, pictureDisplaySelector, pictureKeys);
-    videoUpdate(soundVideo, soundDisplaySelector, soundKeys);
+function videoUpdate(video: Video, videoTitle: VideoTitle, repository: EpisodeRepository) {
+    video.episode.number = episodeCounter.value;
+    video.htmlElement.src = video.episodePath;
 
-    if (videoRepository.contain('picture-time')) {
-        videoRepository.remove('picture-time');
+    videoTitle.value = video.episodePath
+    repository.episode = video.episode;
+}
+
+export function onEpisodeCounterChange() {
+    videoUpdate(pictureVideo, pictureTitle, pictureRepository);
+    videoUpdate(soundVideo, soundTitle, soundRepository);
+
+    pictureRepository.time = 0;
+    soundRepository.time = 0;
+}
+
+
+
+class PictureController {
+
+    private _repository = new PictureEpisodeRepository();
+    private _video = new PictureVideo();
+    private _title = new PictureVideoTitle();
+    private _form = new PictureEpisodeForm();
+    private _episodeCounter = new EpisodeCounter();
+
+    public restoreEpisode() {
+        try {
+            this._video.episode = this._repository.episode;
+            this._video.htmlElement.src = this._video.episodePath;
+
+            this._title.value = this._video.episodePath;
+            this._episodeCounter.value = this._video.episode.number
+
+        } catch (error) {
+            this._title.value = 'None';
+            this._video.episode = new Episode('', 0, 0);
+        }
+        this._form.name = this._video.episode.name;
+        this._form.index = this._video.episode.index;
     }
-    if (videoRepository.contain('sound-time')) {
-        videoRepository.remove('sound-time');
-    };
+
+    public onEpisodeCounterChange() {
+        this._video.episode.number = this._episodeCounter.value;
+        this._video.htmlElement.src = this._video.episodePath;
+
+        this._title.value = this._video.episodePath
+        this._repository.episode = this._video.episode;
+
+        this._repository.time = 0;
+    }
 }
 
-function videoUpdate(video: Video, displaySelector: string, dataKeys: episodeDataKeys) {
-    const numberEpisode = getInputEpisodeNumber();
-    video.episode.number = numberEpisode;
-    video.htmlElement.src = encodeURI(video.episodePath);
+class SoundController {
 
-    displayEpisodeName(displaySelector, video.episodePath);
-    episodeRepository.save(dataKeys, video.episode);
+    private _repository = new SoundEpisodeRepository();
+    private _video = new SoundVideo();
+    private _title = new SoundVideoTitle();
+    private _form = new SoundEpisodeForm();
+    private _episodeCounter = new EpisodeCounter();
+
+    public restoreEpisode() {
+        try {
+            this._video.episode = this._repository.episode;
+            this._video.htmlElement.src = this._video.episodePath;
+
+            this._title.value = this._video.episodePath;
+            this._episodeCounter.value = this._video.episode.number
+
+        } catch (error) {
+            this._title.value = 'None';
+            this._video.episode = new Episode('', 0, 0);
+        }
+        this._form.name = this._video.episode.name;
+        this._form.index = this._video.episode.index;
+    }
+
+    public onEpisodeCounterChange() {
+        this._video.episode.number = this._episodeCounter.value;
+        this._video.htmlElement.src = this._video.episodePath;
+
+        this._title.value = this._video.episodePath
+        this._repository.episode = this._video.episode;
+
+        this._repository.time = 0;
+    }
 }
-
