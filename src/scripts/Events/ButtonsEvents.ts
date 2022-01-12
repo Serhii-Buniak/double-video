@@ -15,20 +15,20 @@ const episodeCounter = new EpisodeCounter();
 episodeCounter.icrementor.addEventListener('click', () => episodeCounter.value++);
 episodeCounter.decrementor.addEventListener('click', () => episodeCounter.value--);
 
-const selectorEventHandlerPairs: { selector: string, handled: EventListenerOrEventListenerObject }[] = [
-    { selector: '#sound-play', handled: () => { soundVideo.element.switchPlaying() } },
-    { selector: '#picture-play', handled: () => { pictureVideo.element.switchPlaying() } },
-    { selector: '#sound-fullscreen', handled: () => { soundVideo.element.switchFullscreen() } },
-    { selector: '#picture-fullscreen', handled: () => { pictureVideo.element.switchFullscreen() } },
-    { selector: '#sound-mute', handled: () => { soundVideo.element.switchSound() } },
-    { selector: '#picture-mute', handled: () => { soundVideo.element.switchSound() } },
-    { selector: '#both-play', handled: bothPlay },
-    { selector: '#ready', handled: ready },
+const selectorEventHandlerPairs: { selector: string, handler: EventListenerOrEventListenerObject }[] = [
+    { selector: '#sound-play', handler: () => { soundVideo.element.switchPlaying() } },
+    { selector: '#picture-play', handler: () => { pictureVideo.element.switchPlaying() } },
+    { selector: '#sound-fullscreen', handler: () => { soundVideo.element.switchFullscreen() } },
+    { selector: '#picture-fullscreen', handler: () => { pictureVideo.element.switchFullscreen() } },
+    { selector: '#sound-mute', handler: () => { soundVideo.element.switchSound() } },
+    { selector: '#picture-mute', handler: () => { soundVideo.element.switchSound() } },
+    { selector: '#both-play', handler: bothPlay },
+    { selector: '#ready', handler: ready },
 ]
 
 selectorEventHandlerPairs.forEach((el) => {
     document.querySelector(el.selector)
-        ?.addEventListener('click', el.handled);
+        ?.addEventListener('click', el.handler);
 })
 
 
