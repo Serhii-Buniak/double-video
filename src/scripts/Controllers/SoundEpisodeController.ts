@@ -13,10 +13,10 @@ class SoundEpisodeController {
     private _form = new SoundEpisodeForm();
     private _episodeCounter = new EpisodeCounter();
   
-    public restoreEpisode() {
+    public restore() {
         try {
             this._video.episode = this._repository.episode;
-            this._video.htmlElement.src = this._video.episodePath;
+            this._video.element.source = this._video.episodePath;
 
             this._title.value = this._video.episodePath;
             this._episodeCounter.value = this._video.episode.number
@@ -31,7 +31,7 @@ class SoundEpisodeController {
 
     public onEpisodeCounterChange() {
         this._video.episode.number = this._episodeCounter.value;
-        this._video.htmlElement.src = this._video.episodePath;
+        this._video.element.source = this._video.episodePath;
 
         this._title.value = this._video.episodePath
         this._repository.episode = this._video.episode;
@@ -41,7 +41,7 @@ class SoundEpisodeController {
 
     public onFormChange() {
         this._repository.episode = new Episode(this._form.name, this._form.index, this._episodeCounter.value)
-        this.restoreEpisode();
+        this.restore();
     }
 }
 

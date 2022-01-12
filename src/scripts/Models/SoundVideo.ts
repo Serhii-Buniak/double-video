@@ -1,11 +1,12 @@
+import SoundVideoElement from "../UI/VideoElements/SoundVideoElement.js";
 import Episode from "./Episode.js";
 import Video from "./Video.js";
 
 class SoundVideo extends Video {
     constructor(episode?: Episode) {
-        const htmlElement = document.querySelector('#sound-video') as HTMLVideoElement;
+        const element = new SoundVideoElement();
         const folder = '/Sound';
-        super(htmlElement, folder, episode)
+        super(element, folder, episode)
     }
 
 }

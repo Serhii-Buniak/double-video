@@ -1,17 +1,16 @@
 import PictureVideo from '../Models/PictureVideo.js';
 import SoundVideo from '../Models/SoundVideo.js';
-import Video from '../Models/Video.js';
 
 const soundVideo = new SoundVideo();
 const pictureVideo = new PictureVideo();
 
 const selectorEventHandlerPairs: { selector: string, handled: EventListenerOrEventListenerObject }[] = [
-    { selector: '#sound-play', handled: () => { soundVideo.switchPlaying() } },
-    { selector: '#picture-play', handled: () => { pictureVideo.switchPlaying() } },
-    { selector: '#sound-fullscreen', handled: () => { soundVideo.switchFullscreen() } },
-    { selector: '#picture-fullscreen', handled: () => { pictureVideo.switchFullscreen() } },
-    { selector: '#sound-mute', handled: () => { soundVideo.switchSound() } },
-    { selector: '#picture-mute', handled: () => { soundVideo.switchSound() } },
+    { selector: '#sound-play', handled: () => { soundVideo.element.switchPlaying() } },
+    { selector: '#picture-play', handled: () => { pictureVideo.element.switchPlaying() } },
+    { selector: '#sound-fullscreen', handled: () => { soundVideo.element.switchFullscreen() } },
+    { selector: '#picture-fullscreen', handled: () => { pictureVideo.element.switchFullscreen() } },
+    { selector: '#sound-mute', handled: () => { soundVideo.element.switchSound() } },
+    { selector: '#picture-mute', handled: () => { soundVideo.element.switchSound() } },
     { selector: '#both-play', handled: bothPlay },
     { selector: '#ready', handled: ready },
 ]
@@ -23,19 +22,19 @@ selectorEventHandlerPairs.forEach((el) => {
 
 
 function bothPlay() {
-    if (pictureVideo.isPaused() != soundVideo.isPaused()) {
-        pictureVideo.stop();
-        soundVideo.stop();
+    if (pictureVideo.element.isPaused() != soundVideo.element.isPaused()) {
+        pictureVideo.element.stop();
+        soundVideo.element.stop();
     } else {
-        soundVideo.switchPlaying()
-        pictureVideo.switchPlaying()
+        soundVideo.element.switchPlaying()
+        pictureVideo.element.switchPlaying()
     }
 }
 
 function ready() {
-    soundVideo.unmute();
-    pictureVideo.mute();
-    pictureVideo.fullscreenOn();
+    soundVideo.element.unmute();
+    pictureVideo.element.mute();
+    pictureVideo.element.fullscreenOn();
 }
 
 
@@ -53,13 +52,13 @@ document.addEventListener('keyup', (e) => {
     if (isShiftCliked) {
         switch (evt.code) {
             case 'KeyQ':
-                soundVideo.switchPlaying();
+                soundVideo.element.switchPlaying();
                 break;
             case 'KeyA':
-                soundVideo.switchFullscreen();
+                soundVideo.element.switchFullscreen();
                 break;
             case 'KeyZ':
-                soundVideo.switchSound()
+                soundVideo.element.switchSound()
                 break;
             case 'KeyW':
                 bothPlay();
@@ -68,16 +67,17 @@ document.addEventListener('keyup', (e) => {
                 ready();
                 break;
             case 'KeyE':
-                pictureVideo.switchPlaying();
+                pictureVideo.element.switchPlaying();
                 break;
             case 'KeyD':
-                pictureVideo.switchFullscreen();
+                pictureVideo.element.switchFullscreen();
                 break;
             case 'KeyC':
-                pictureVideo.switchSound();
+                pictureVideo.element.switchSound();
                 break;
             default:
                 isShiftCliked = false;
         }
     }
 })
+

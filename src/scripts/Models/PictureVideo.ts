@@ -1,11 +1,12 @@
+import PictureVideoElement from "../UI/VideoElements/PictureVideoElement.js";
 import Episode from "./Episode.js";
 import Video from "./Video.js";
 
 class PictureVideo extends Video {
     constructor(episode?: Episode) {
-        const htmlElement = document.querySelector('#picture-video') as HTMLVideoElement;
+        const element = new PictureVideoElement();
         const folder = '/Picture';
-        super(htmlElement, folder, episode)
+        super(element, folder, episode)
     }
 }
 

@@ -1,8 +1,8 @@
 import EpisodeForm from "./EpisodeForm";
 
 class PictureEpisodeForm extends EpisodeForm {
-    nameInput = document.querySelector('#input-picture-name') as HTMLInputElement;
-    indexInput = document.querySelector('#input-picture-index') as HTMLInputElement;
+    protected nameInput = document.querySelector('#input-picture-name') as HTMLInputElement;
+    protected indexInput = document.querySelector('#input-picture-index') as HTMLInputElement;
 }
 
 export default PictureEpisodeForm;

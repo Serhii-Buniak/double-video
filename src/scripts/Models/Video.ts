@@ -1,33 +1,23 @@
+import VideoElement from "../UI/VideoElements/VideoElement.js";
 import Episode from "./Episode.js";
 
 abstract class Video {
     private _episode?: Episode;
-    readonly htmlElement: HTMLVideoElement;
-    readonly folder?: string;
+    readonly element: VideoElement;
+    readonly folder: string;
     static _isFullScreen: boolean = false;
 
-    constructor(htmlElement: HTMLVideoElement, folderPath?: string, episode?: Episode) {
-        this.htmlElement = htmlElement
+    constructor(element: VideoElement, folderPath: string, episode?: Episode) {
+        this.element = element
         this.folder = folderPath;
         this._episode = episode;
     }
 
     public set episode(value: Episode) {
         this._episode = value;
-
     }
-
-    static get isFullScreen(): boolean {
-        return Video._isFullScreen;
-    }
-
     public get episode(): Episode {
-        if (this._episode !== undefined) {
-            return this._episode as unknown as Episode
-        } else {
-            throw new Error("Episode is undefined")
-        }
-
+        return this._episode as Episode;
     }
 
     public get episodePath(): string {
@@ -37,69 +27,6 @@ abstract class Video {
         return this.folder + '/' + this.episode.numeratedName;
     }
 
-    public play() {
-        this.htmlElement.play();
-    }
-
-    public load() {
-        this.htmlElement.load();
-    }
-
-    public isPaused() {
-        return this.htmlElement.paused
-    }
-
-    public isMuted() {
-        return this.htmlElement.muted;
-    }
-
-    public stop() {
-        this.htmlElement.pause();
-    }
-    static fullscreenOff() {
-        document.exitFullscreen();
-        Video._isFullScreen = false;
-    }
-    public fullscreenOn() {
-        if (Video._isFullScreen) {
-            Video.fullscreenOff();
-        }
-
-        this.htmlElement.requestFullscreen();
-        Video._isFullScreen = true;
-    }
-
-    public mute() {
-        this.htmlElement.muted = true;
-    }
-
-    public unmute() {
-        this.htmlElement.muted = false;
-    }
-
-    public switchPlaying() {
-        if (this.isPaused()) {
-            this.play();
-        } else {
-            this.stop();
-        }
-    }
-
-    public switchSound() {
-        if (this.isMuted() === false) {
-            this.mute();
-        } else {
-            this.unmute();
-        }
-    }
-    public switchFullscreen() {
-        if (Video.isFullScreen) {
-            Video.fullscreenOff();
-        }
-        else {
-            this.fullscreenOn();
-        }
-    }
 }
 export default Video;
 
