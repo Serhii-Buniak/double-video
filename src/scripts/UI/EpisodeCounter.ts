@@ -1,8 +1,8 @@
 class EpisodeCounter {
 
     private valueInput = document.querySelector('#episode-input') as HTMLInputElement;
-    readonly icrementor: Incrementor = new Incrementor();
-    readonly decrementor: Decrementor = new Decrementor();
+    readonly icrementor = new Incrementor();
+    readonly decrementor = new Decrementor();
 
     public get value(): number {
         return Number(this.valueInput.value);
