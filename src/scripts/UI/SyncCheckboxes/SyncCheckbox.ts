@@ -1,4 +1,4 @@
-import InputElement from "../InputElement";
+import InputElement from "../InputElement.js";
 
 abstract class SyncCheckbox {
     protected abstract inputElement: InputElement<boolean>;

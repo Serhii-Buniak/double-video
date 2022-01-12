@@ -12,16 +12,8 @@ const pictureController = new SoundEpisodeController();
 
 const episodeCounter = new EpisodeCounter();
 
-episodeCounter.icrementor.addEventListener('click', () => {
-    episodeCounter.value++;
-    pictureController.onEpisodeCounterChange();
-    soundController.onEpisodeCounterChange();
-});
-episodeCounter.decrementor.addEventListener('click', () => {
-    episodeCounter.value--;
-    pictureController.onEpisodeCounterChange();
-    soundController.onEpisodeCounterChange();
-});
+episodeCounter.icrementor.addEventListener('click', () => episodeCounter.value++);
+episodeCounter.decrementor.addEventListener('click', () => episodeCounter.value--);
 
 const selectorEventHandlerPairs: { selector: string, handled: EventListenerOrEventListenerObject }[] = [
     { selector: '#sound-play', handled: () => { soundVideo.element.switchPlaying() } },
