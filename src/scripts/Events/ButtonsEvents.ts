@@ -1,8 +1,27 @@
+import PictureEpisodeController from '../Controllers/PictureEpisodeController.js';
+import SoundEpisodeController from '../Controllers/SoundEpisodeController.js';
 import PictureVideo from '../Models/PictureVideo.js';
 import SoundVideo from '../Models/SoundVideo.js';
+import EpisodeCounter from '../UI/EpisodeCounter.js';
 
 const soundVideo = new SoundVideo();
 const pictureVideo = new PictureVideo();
+
+const soundController = new PictureEpisodeController();
+const pictureController = new SoundEpisodeController();
+
+const episodeCounter = new EpisodeCounter();
+
+episodeCounter.icrementor.addEventListener('click', () => {
+    episodeCounter.value++;
+    pictureController.onEpisodeCounterChange();
+    soundController.onEpisodeCounterChange();
+});
+episodeCounter.decrementor.addEventListener('click', () => {
+    episodeCounter.value--;
+    pictureController.onEpisodeCounterChange();
+    soundController.onEpisodeCounterChange();
+});
 
 const selectorEventHandlerPairs: { selector: string, handled: EventListenerOrEventListenerObject }[] = [
     { selector: '#sound-play', handled: () => { soundVideo.element.switchPlaying() } },

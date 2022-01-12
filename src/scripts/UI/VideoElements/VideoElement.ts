@@ -1,53 +1,51 @@
 abstract class VideoElement {
     protected abstract htmlElement: HTMLVideoElement
     static _isFullScreen: boolean = false;
-    set source(value: string) {
-        this.htmlElement.src = value;
-    }
-    get source(): string {
-        return this.htmlElement.src;
-    }
 
-    static get isFullScreen(): boolean {
-        return VideoElement._isFullScreen;
-    }
     public play() {
         this.htmlElement.play();
+    }
+    public stop() {
+        this.htmlElement.pause();
+    }
+    public isPaused() {
+        return this.htmlElement.paused
     }
 
     public load() {
         this.htmlElement.load();
     }
 
-    public isPaused() {
-        return this.htmlElement.paused
+    public set source(value: string) {
+        this.htmlElement.src = value;
+    }
+    public get source(): string {
+        return this.htmlElement.src;
     }
 
-    public isMuted() {
-        return this.htmlElement.muted;
-    }
-
-    public stop() {
-        this.htmlElement.pause();
-    }
-    static fullscreenOff() {
-        document.exitFullscreen();
-        VideoElement._isFullScreen = false;
-    }
     public fullscreenOn() {
-        if (VideoElement._isFullScreen) {
+        if (VideoElement.isFullScreen) {
             VideoElement.fullscreenOff();
         }
         this.htmlElement.requestFullscreen();
         VideoElement._isFullScreen = true;
     }
+    private static fullscreenOff() {
+        document.exitFullscreen();
+        VideoElement._isFullScreen = false;
+    }
+    public static get isFullScreen(): boolean {
+        return VideoElement._isFullScreen;
+    }
 
     public mute() {
         this.htmlElement.muted = true;
     }
-
     public unmute() {
         this.htmlElement.muted = false;
+    }
+    public isMuted() {
+        return this.htmlElement.muted;
     }
 
     public switchPlaying() {
@@ -65,6 +63,7 @@ abstract class VideoElement {
             this.unmute();
         }
     }
+    
     public switchFullscreen() {
         if (VideoElement.isFullScreen) {
             VideoElement.fullscreenOff();
@@ -88,11 +87,11 @@ abstract class VideoElement {
         return this.htmlElement.volume;
     }
 
-    get addEventListener() {
-        return this.htmlElement.addEventListener;
+    public addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.htmlElement.addEventListener(type, listener, options);
     }
-    get removeEventListener() {
-        return this.htmlElement.removeEventListener;
+    publicremoveEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.htmlElement.addEventListener(type, listener, options);
     }
 }
 

@@ -1,18 +1,19 @@
+import InputElement from "../InputElement";
+
 abstract class SyncCheckbox {
-    protected abstract _htmlElement: HTMLInputElement;
+    protected abstract inputElement: InputElement<boolean>;
     public set checked(value: boolean) {
-        this._htmlElement.checked = value;
+        this.inputElement.innerElement.checked = value;
     }
     public get checked(): boolean {
-        return this._htmlElement.checked;
+        return this.inputElement.innerElement.checked;
     }
 
-    get addEventListener() {
-        return this._htmlElement.addEventListener;
+    public addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.inputElement.innerElement.addEventListener(type, listener, options);
     }
-
-    get removeEventListener() {
-        return this._htmlElement.removeEventListener;
+    public removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.inputElement.innerElement.addEventListener(type, listener, options);
     }
 }
 export default SyncCheckbox;

@@ -11,6 +11,7 @@
             -webkit-appearance: none;
             margin: 0;
         }
+
         body {
             background-image: url("https://gen.jut.su/chakranature/background_anime_bleach.dark.jpg");
             background-position: top;
@@ -167,12 +168,14 @@
 
     <script type="module" src="/js/index.js"></script>
 
-    <script type="module" src="/js/Controllers/EpisodeController.js"></script>
-    <script type="module" src="/js/Controllers/VideoController.js"></script>
+    <script type="module" src="/js/Controllers/PictureEpisodeController.js"></script>
+    <script type="module" src="/js/Controllers/SoundEpisodeController.js"></script>
+    <script type="module" src="/js/Controllers/VideosController.js"></script>
 
-    <script type="module" src="/js/Events/EpisodeEvents.js"></script>
-    <script type="module" src="/js/Events/VideoEvents.js"></script>
-
+    <script type="module" src="/js/Models/Episode.js"></script>
+    <script type="module" src="/js/Models/Video.js"></script>
+    <script type="module" src="/js/Models/PictureVideo.js"></script>
+    <script type="module" src="/js/Models/SoundVideo.js"></script>
 
     <script type="module" src="/js/Data/DataContext.js"></script>
     <script type="module" src="/js/Data/EpisodeRepository.js"></script>
@@ -180,10 +183,30 @@
     <script type="module" src="/js/Data/SoundEpisodeRepository.js"></script>
     <script type="module" src="/js/Data/VideosService.js"></script>
 
-    <script type="module" src="/js/Models/Video.js"></script>
-    <script type="module" src="/js/Models/Episode.js"></script>
-    <script type="module" src="/js/Models/PictureVideo.js"></script>
-    <script type="module" src="/js/Models/SoundVideo.js"></script>
+    <script type="module" src="/js/UI/DelayInput.js"></script>
+    <script type="module" src="/js/UI/EpisodeCounter.js"></script>
+    <script type="module" src="/js/UI/EpisodeForms/EpisodeForm.js"></script>
+    <script type="module" src="/js/UI/EpisodeForms/PictureEpisodeForm.js"></script>
+    <script type="module" src="/js/UI/EpisodeForms/SoundEpisodeForm.js"></script>
+    <script type="module" src="/js/UI/SyncCheckboxes/SyncCheckbox.js"></script>
+    <script type="module" src="/js/UI/SyncCheckboxes/AudioSyncCheckbox.js"></script>
+    <script type="module" src="/js/UI/SyncCheckboxes/VideoSyncCheckbox.js"></script>
+
+    <script type="module" src="/js/Data/DataContext.js"></script>
+    <script type="module" src="/js/Data/EpisodeRepository.js"></script>
+    <script type="module" src="/js/Data/PictureEpisodeRepository.js"></script>
+    <script type="module" src="/js/Data/SoundEpisodeRepository.js"></script>
+    <script type="module" src="/js/Data/VideosService.js"></script>
+
+    <script type="module" src="/js/Events/PictureEpisodeEvents.js"></script>
+    <script type="module" src="/js/Events/SoundEpisodeEvents.js"></script>
+    <script type="module" src="/js/Events/ButtonsEvents.js"></script>
+    <script type="module" src="/js/Events/VideosEvents.js"></script>
+
+
+
+
+
 
 
 

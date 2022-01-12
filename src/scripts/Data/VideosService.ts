@@ -1,8 +1,7 @@
 import DataContext from "./DataContext.js";
 
 class VideosService {
-
-    protected readonly _dataContext = new DataContext;
+    private readonly _dataContext = new DataContext;
 
     private static readonly isVideoSyncKey = 'video-sync';
     private static readonly isAudioSyncKey = 'audio-sync';

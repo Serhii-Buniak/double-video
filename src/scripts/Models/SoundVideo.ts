@@ -8,7 +8,6 @@ class SoundVideo extends Video {
         const folder = '/Sound';
         super(element, folder, episode)
     }
-
 }
 
 export default SoundVideo;

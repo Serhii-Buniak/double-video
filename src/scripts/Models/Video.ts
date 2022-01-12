@@ -2,10 +2,9 @@ import VideoElement from "../UI/VideoElements/VideoElement.js";
 import Episode from "./Episode.js";
 
 abstract class Video {
-    private _episode?: Episode;
     readonly element: VideoElement;
     readonly folder: string;
-    static _isFullScreen: boolean = false;
+    protected _episode?: Episode;
 
     constructor(element: VideoElement, folderPath: string, episode?: Episode) {
         this.element = element
@@ -26,9 +25,6 @@ abstract class Video {
         }
         return this.folder + '/' + this.episode.numeratedName;
     }
-
 }
+
 export default Video;
-
-
-

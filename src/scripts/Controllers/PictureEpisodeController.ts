@@ -6,7 +6,6 @@ import PictureVideoTitle from '../UI/VideosTitles/PictureVideoTitle.js';
 import EpisodeCounter from '../UI/EpisodeCounter.js';
 
 class PictureEpisodeController {
-
     private _repository = new PictureEpisodeRepository();
     private _video = new PictureVideo();
     private _title = new PictureVideoTitle();
@@ -43,7 +42,6 @@ class PictureEpisodeController {
         this._repository.episode = new Episode(this._form.name, this._form.index, this._episodeCounter.value)
         this.restore();
     }
-
 }
 
 export default PictureEpisodeController

@@ -1,9 +1,8 @@
-import VideosController from "../Controllers/VideosController";
-import DelayInput from "../UI/DelayInput";
-import AudioSyncCheckbox from "../UI/SyncCheckboxes/AudioSyncCheckbox";
-import VideoSyncCheckbox from "../UI/SyncCheckboxes/VideoSyncCheckbox";
-import PictureVideoElement from "../UI/VideoElements/PictureVideoElement";
-import SoundVideoElement from "../UI/VideoElements/SoundVideoElement";
+import VideosController from "../Controllers/VideosController.js";
+import DelayInput from "../UI/DelayInput.js";
+import AudioSyncCheckbox from "../UI/SyncCheckboxes/AudioSyncCheckbox.js";
+import VideoSyncCheckbox from "../UI/SyncCheckboxes/VideoSyncCheckbox.js";
+import PictureVideoElement from "../UI/VideoElements/PictureVideoElement.js";
 
 const controller = new VideosController();
 
@@ -14,15 +13,13 @@ const audioSync = new AudioSyncCheckbox()
 
 const delayElement = new DelayInput();
 
-document.addEventListener("DOMContentLoaded", controller.restore);
+document.addEventListener("DOMContentLoaded", controller.restore.bind(controller));
 
-picture.addEventListener('volumechange', controller.onVolumeChange);
+picture.addEventListener('volumechange', controller.onVolumeChange.bind(controller));
 
-videoSync.addEventListener('change', controller.onVideoSyncSwitch);
-audioSync.addEventListener('change', controller.onAudioSyncSwitch);
+videoSync.addEventListener('change', controller.onVideoSyncSwitch.bind(controller));
+audioSync.addEventListener('change', controller.onAudioSyncSwitch.bind(controller));
 
-delayElement.addEventListener('change', controller.onDelayChange);
+delayElement.addEventListener('change', controller.onDelayChange.bind(controller));
 
-setInterval(() => {
-    controller.onVideoTrackMove;
-}, 5);
+setInterval(controller.onVideoTrackMove.bind(controller), 20);

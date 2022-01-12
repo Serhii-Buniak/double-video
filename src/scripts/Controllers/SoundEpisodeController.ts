@@ -1,12 +1,11 @@
-import SoundEpisodeRepository from "../Data/SoundEpisodeRepository";
-import Episode from "../Models/Episode";
-import SoundVideo from "../Models/SoundVideo";
-import EpisodeCounter from "../UI/EpisodeCounter";
-import SoundEpisodeForm from "../UI/EpisodeForms/SoundEpisodeForm";
-import SoundVideoTitle from "../UI/VideosTitles/SoundVideoTitle";
+import SoundEpisodeRepository from "../Data/SoundEpisodeRepository.js";
+import Episode from "../Models/Episode.js";
+import SoundVideo from "../Models/SoundVideo.js";
+import EpisodeCounter from "../UI/EpisodeCounter.js";
+import SoundEpisodeForm from "../UI/EpisodeForms/SoundEpisodeForm.js";
+import SoundVideoTitle from "../UI/VideosTitles/SoundVideoTitle.js";
 
 class SoundEpisodeController {
-
     private _repository = new SoundEpisodeRepository();
     private _video = new SoundVideo();
     private _title = new SoundVideoTitle();

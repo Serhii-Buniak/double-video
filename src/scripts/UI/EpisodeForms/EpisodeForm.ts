@@ -1,27 +1,38 @@
+import InputElement from "../InputElement";
+
 abstract class EpisodeForm {
-    protected abstract nameInput: HTMLInputElement;
-    protected abstract indexInput: HTMLInputElement;
+    protected abstract nameInput: InputElement<string>;
+    protected abstract indexInput: InputElement<number>;
 
     public set name(value: string) {
         this.nameInput.value = String(value);
     }
-    public get name(): string {   
+    public get name(): string {
         return this.nameInput.value;
-    }
-    public get nameAddEventListener() {
-        return this.nameInput.addEventListener;
     }
 
     public set index(value: number) {
-        this.indexInput.value = String(value);
+        this.indexInput.value = value;
     }
     public get index(): number {
-        return Number(this.indexInput.value);
+        return this.indexInput.value;
     }
-    public get indexAddEventListener() {
-        return this.indexInput.addEventListener;
+
+    indexAddEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.nameInput.innerElement.addEventListener(type, listener, options);
+    }
+    indexRemoveEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.nameInput.innerElement.addEventListener(type, listener, options);
+    }
+
+    nameAddEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.indexInput.innerElement.addEventListener(type, listener, options);
+    }
+    nameRemoveEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.indexInput.innerElement.addEventListener(type, listener, options);
     }
 }
+
 
 export default EpisodeForm;
 

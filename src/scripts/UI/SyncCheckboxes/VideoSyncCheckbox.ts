@@ -1,7 +1,8 @@
-import SyncCheckbox from "./SyncCheckbox";
+import InputElement from "../InputElement.js";
+import SyncCheckbox from "./SyncCheckbox.js";
 
 class VideoSyncCheckbox extends SyncCheckbox {
-    protected _htmlElement = document.getElementById('video-sync') as HTMLInputElement;
+    protected inputElement = new InputElement<boolean>('#video-sync');;
 }
 
 export default VideoSyncCheckbox;

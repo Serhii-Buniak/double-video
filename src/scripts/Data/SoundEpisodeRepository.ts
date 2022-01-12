@@ -1,7 +1,6 @@
 import EpisodeRepository from "./EpisodeRepository.js";
 
 class SoundEpisodeRepository extends EpisodeRepository {
-
     private static readonly nameKey = 'sound-name';
     private static readonly indexKey = 'sound-index';
     private static readonly timeKey = 'sound-time';

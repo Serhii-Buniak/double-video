@@ -1,5 +1,4 @@
 class DataContext {
-
     private _localStorage = window.localStorage;
 
     public contain(key: string): boolean {
@@ -36,7 +35,7 @@ class DataContext {
         if (item === null) {
             throw new Error('Key not exist');
         }
-        return item as string;
+        return item;
     }
 
 }

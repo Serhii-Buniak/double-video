@@ -1,18 +1,20 @@
+import InputElement from "./InputElement";
+
 class DelayInput {
-    private _htmlElement = document.querySelector('#delay') as HTMLInputElement;
+    private _inputElement = new InputElement('#delay');
 
     public set value(value: number) {
-        this._htmlElement.value = String(value);
+        this._inputElement.value = String(value);
     }
     public get value(): number {
-        return Number(this._htmlElement.value);
+        return Number(this._inputElement.value);
     }
 
-    get addEventListener() {
-        return this._htmlElement.addEventListener;
+    public addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this._inputElement.innerElement.addEventListener(type, listener, options);
     }
-    get removeEventListener() {
-        return this._htmlElement.removeEventListener;
+    public removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this._inputElement.innerElement.addEventListener(type, listener, options);
     }
 }
 

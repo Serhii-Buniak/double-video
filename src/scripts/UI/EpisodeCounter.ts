@@ -1,22 +1,23 @@
+import InputElement from "./InputElement";
+
 class EpisodeCounter {
 
-    private valueInput = document.querySelector('#episode-input') as HTMLInputElement;
-    readonly icrementor = new Incrementor();
-    readonly decrementor = new Decrementor();
+    private _inputElement = new InputElement<number>('#episode-input');
+    public readonly icrementor = new Incrementor();
+    public readonly decrementor = new Decrementor();
 
     public get value(): number {
-        return Number(this.valueInput.value);
+        return this._inputElement.value;
     }
     public set value(value: number) {
-        this.valueInput.value = String(value);
+        this._inputElement.value = value;
     }
 
-    get addEventListener() {
-        return this.valueInput.addEventListener;
+    public addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this._inputElement.innerElement.addEventListener(type, listener, options);
     }
-
-    get removeEventListener() {
-        return this.valueInput.removeEventListener;
+    public removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this._inputElement.innerElement.addEventListener(type, listener, options);
     }
 }
 
@@ -24,12 +25,11 @@ abstract class CounterOperator {
 
     protected abstract htmlElement: HTMLElement;
 
-    get addEventListener() {
-        return this.htmlElement.addEventListener;
+    public addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.htmlElement.addEventListener(type, listener, options);
     }
-
-    get removeEventListener() {
-        return this.htmlElement.removeEventListener;
+    public removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
+        this.htmlElement.addEventListener(type, listener, options);
     }
 }
 

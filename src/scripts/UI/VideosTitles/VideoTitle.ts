@@ -9,6 +9,7 @@ abstract class VideoTitle {
         return this.htmlElement.innerText;
     }
 }
+
 export default VideoTitle;
 
 

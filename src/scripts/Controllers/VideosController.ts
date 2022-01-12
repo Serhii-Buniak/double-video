@@ -1,4 +1,3 @@
-import EpisodeRepository from "../Data/EpisodeRepository.js";
 import PictureEpisodeRepository from "../Data/PictureEpisodeRepository.js";
 import SoundEpisodeRepository from "../Data/SoundEpisodeRepository.js";
 import VideosService from "../Data/VideosService.js";
@@ -17,10 +16,10 @@ class VideosController {
     private readonly _soundElement = new SoundVideoElement();;
     private readonly _pictureElement = new PictureVideoElement();
     private readonly _delayElement = new DelayInput();
-    private _prevTime: number = 0;
+    private _prevTime = 0;
 
     public onVolumeChange() {
-        if (this._audioSyncElement.checked) {
+        if (this._audioSyncElement.checked == true) {
             this._soundElement.volume = this._pictureElement.volume;
             setTimeout(() => this._pictureElement.mute(), 2000);
         }
@@ -30,12 +29,15 @@ class VideosController {
         if (this._videoSyncElement.checked) {
             this._soundElement.time = this._pictureElement.time - this._delayElement.value;
         }
+        this._videosService.isVideoSync = this._videoSyncElement.checked;
     }
 
     public onAudioSyncSwitch() {
         this._videosService.isAudioSync = this._audioSyncElement.checked;
-        this._soundElement.volume = this._pictureElement.volume;
-        this._pictureElement.mute();
+        if (this._audioSyncElement.checked) {
+            this._soundElement.volume = this._pictureElement.volume;
+            this._pictureElement.mute();
+        }
     }
 
     public onDelayChange() {

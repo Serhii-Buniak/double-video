@@ -1,17 +1,14 @@
-import PictureEpisodeController from "../Controllers/PictureEpisodeController";
-import EpisodeCounter from "../UI/EpisodeCounter";
-import PictureEpisodeForm from "../UI/EpisodeForms/PictureEpisodeForm";
+import PictureEpisodeController from "../Controllers/PictureEpisodeController.js";
+import EpisodeCounter from "../UI/EpisodeCounter.js";
+import PictureEpisodeForm from "../UI/EpisodeForms/PictureEpisodeForm.js";
 
 const controller = new PictureEpisodeController();
 const form = new PictureEpisodeForm();
 const episodeCounter = new EpisodeCounter();
 
-document.addEventListener("DOMContentLoaded", controller.restore);
+document.addEventListener("DOMContentLoaded", controller.restore.bind(controller));
 
-episodeCounter.addEventListener('change', controller.onEpisodeCounterChange);
+episodeCounter.addEventListener('change', controller.onEpisodeCounterChange.bind(controller))
 
-episodeCounter.icrementor.addEventListener('click', () =>  episodeCounter.value++);
-episodeCounter.decrementor.addEventListener('click', () => episodeCounter.value--);
-
-form.indexAddEventListener('change', controller.onFormChange);
-form.nameAddEventListener('change', controller.onFormChange)
+form.indexAddEventListener('change', controller.onFormChange.bind(controller));
+form.nameAddEventListener('change', controller.onFormChange.bind(controller))

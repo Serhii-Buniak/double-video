@@ -1,7 +1,6 @@
 import EpisodeRepository from "./EpisodeRepository.js";
 
 class PictureEpisodeRepository extends EpisodeRepository {
-
     private static readonly nameKey = 'picture-name';
     private static readonly indexKey = 'picture-index';
     private static readonly timeKey = 'picture-time';
@@ -34,7 +33,7 @@ class PictureEpisodeRepository extends EpisodeRepository {
     get time(): number {
         return Number(this._dataContext.getValue(PictureEpisodeRepository.timeKey));
     }
- 
+
 }
 
 export default PictureEpisodeRepository;
