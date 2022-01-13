@@ -1,55 +1,71 @@
 abstract class VideoElement {
-    protected abstract htmlElement: HTMLVideoElement
-    static _isFullScreen: boolean = false;
+    private _htmlElement: HTMLVideoElement
+    private static _mainFullscreenId: number = Math.random();
+    private _fullscreenId: number = Math.random();
+    constructor(htmlElement: HTMLVideoElement) {
+        this._htmlElement = htmlElement
+    }
 
     public play() {
-        this.htmlElement.play();
+        this._htmlElement.play();
     }
     public stop() {
-        this.htmlElement.pause();
+        this._htmlElement.pause();
     }
-    public isPaused() {
-        return this.htmlElement.paused
+    public get isPaused(): boolean {
+        return this._htmlElement.paused
     }
 
     public load() {
-        this.htmlElement.load();
+        this._htmlElement.load();
     }
 
     public set source(value: string) {
-        this.htmlElement.src = value;
+        this._htmlElement.src = value;
     }
     public get source(): string {
-        return this.htmlElement.src;
+        return this._htmlElement.src;
     }
 
-    public fullscreenOn() {
-        if (VideoElement.isFullScreen) {
-            VideoElement.fullscreenOff();
+    public async fullscreenOn() {
+        try {
+            await document.exitFullscreen();
+            this._htmlElement.requestFullscreen();
+        } catch {
+            this._htmlElement.requestFullscreen();
         }
-        this.htmlElement.requestFullscreen();
-        VideoElement._isFullScreen = true;
+        const random = Math.random();
+        VideoElement._mainFullscreenId = random;
+        this._fullscreenId = random;
     }
-    private static fullscreenOff() {
-        document.exitFullscreen();
-        VideoElement._isFullScreen = false;
+    public async fullscreenOff() {
+        await document.exitFullscreen();
+        VideoElement._mainFullscreenId = Math.random();
+        this._fullscreenId = Math.random();
     }
-    public static get isFullScreen(): boolean {
-        return VideoElement._isFullScreen;
+
+    public async switchFullscreen() {
+        if (this._fullscreenId === VideoElement._mainFullscreenId) {
+            this.fullscreenOff();
+            console.log('fullscreenOff');
+        } else {
+            this.fullscreenOn();
+            console.log('fullscreenOn');
+        }
     }
 
     public mute() {
-        this.htmlElement.muted = true;
+        this._htmlElement.muted = true;
     }
     public unmute() {
-        this.htmlElement.muted = false;
+        this._htmlElement.muted = false;
     }
-    public isMuted() {
-        return this.htmlElement.muted;
+    public get isMuted() {
+        return this._htmlElement.muted;
     }
 
     public switchPlaying() {
-        if (this.isPaused()) {
+        if (this.isPaused) {
             this.play();
         } else {
             this.stop();
@@ -57,41 +73,34 @@ abstract class VideoElement {
     }
 
     public switchSound() {
-        if (this.isMuted() === false) {
+        if (this.isMuted === false) {
             this.mute();
         } else {
             this.unmute();
         }
     }
-    
-    public switchFullscreen() {
-        if (VideoElement.isFullScreen) {
-            VideoElement.fullscreenOff();
-        }
-        else {
-            this.fullscreenOn();
-        }
-    }
+
+
 
     public set time(value: number) {
-        this.htmlElement.currentTime = value;
+        this._htmlElement.currentTime = value;
     }
     public get time(): number {
-        return this.htmlElement.currentTime;
+        return this._htmlElement.currentTime;
     }
 
     public set volume(value: number) {
-        this.htmlElement.volume = value;
+        this._htmlElement.volume = value;
     }
     public get volume(): number {
-        return this.htmlElement.volume;
+        return this._htmlElement.volume;
     }
 
     public addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
-        this.htmlElement.addEventListener(type, listener, options);
+        this._htmlElement.addEventListener(type, listener, options);
     }
     publicremoveEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void {
-        this.htmlElement.addEventListener(type, listener, options);
+        this._htmlElement.addEventListener(type, listener, options);
     }
 }
 

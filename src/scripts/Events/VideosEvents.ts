@@ -6,10 +6,10 @@ import PictureVideoElement from "../UI/VideoElements/PictureVideoElement.js";
 
 const controller = new VideosController();
 
-const picture = new PictureVideoElement()
+const picture = new PictureVideoElement();
 
-const videoSync = new VideoSyncCheckbox()
-const audioSync = new AudioSyncCheckbox()
+const videoSync = new VideoSyncCheckbox();
+const audioSync = new AudioSyncCheckbox();
 
 const delayElement = new DelayInput();
 
