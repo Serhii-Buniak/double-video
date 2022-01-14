@@ -1,5 +1,5 @@
 class InputElement<T>{
-    public readonly innerElement: HTMLInputElement;
+    protected readonly innerElement: HTMLInputElement;
 
     constructor(selector: string) {
         this.innerElement = document.querySelector(selector) as HTMLInputElement;
