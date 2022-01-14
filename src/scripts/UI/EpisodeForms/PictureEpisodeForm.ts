@@ -3,6 +3,6 @@ import EpisodeForm from "./EpisodeForm.js";
 
 class PictureEpisodeForm extends EpisodeForm {
     protected nameInput = new InputElement<string>('#input-picture-name');
-    protected indexInput = new InputElement<number>('#input-picture-name'); 
+    protected indexInput = new InputElement<number>('#input-picture-index'); 
 }
 export default PictureEpisodeForm;
