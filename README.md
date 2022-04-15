@@ -1,5 +1,6 @@
 # double-video
 
+https://serhii-buniak.github.io/double-video/
 
 ## What is this project about
 This project was made to synchronize 2 different videos. The first is used as an __audio track__ and the second as a __video track__
