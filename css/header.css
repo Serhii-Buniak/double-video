@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 50px 0;
+}
+
+.header__button {
+  user-select: none;
+  color: whitesmoke;
+  font-size: 40px;
+  margin: 0 20px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.header__button:active {
+  opacity: 1;
+}
+
+.header__input {
+  background-color: rgba(36, 36, 36, 0.514);
+  color: whitesmoke;
+  opacity: 0.5;
+  text-align: center;
+  width: 50px;
+  font-size: 30px;
+  padding: 5px;
+  box-shadow: 0 0 10px;
+}
+
+.header__input:focus {
+  opacity: 1;
+  box-shadow: none;
+}

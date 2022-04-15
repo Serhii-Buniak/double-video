@@ -1,0 +1,57 @@
+.instruction {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.instruction__setting {
+  margin: 0 2px;
+  padding: 10px;
+}
+
+.instruction__box {
+  margin: 0 2px;
+  padding: 30px;
+}
+
+.box__title {
+  font-size: 18px;
+}
+
+.box__letf {
+  background-color: rgba(12, 15, 20, 0.8);
+}
+
+.box__center {
+  background-color: rgba(36, 36, 36, 0.514);
+}
+
+.box__right {
+  background-color: rgba(14, 9, 17, 0.8);
+}
+
+.list__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.list__description {
+  font-size: 18px;
+  text-indent: 50px;
+}
+
+.setting__left {
+  background-color: rgba(12, 15, 20, 0.95);
+}
+
+.setting__right {
+  background-color: rgba(14, 9, 17, 0.95);
+}
+
+.setting__input {
+  padding: 5px;
+  font-size: 21px;
+  width: 500px;
+  color: inherit;
+  background-color: #242424;
+}
