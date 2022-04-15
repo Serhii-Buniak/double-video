@@ -13,4 +13,7 @@ __Functionality:__
 
 *only when name of files have difference in number of episode
 
-![prewiew.png]()
+![prewiew.png](https://github.com/Serhii-Buniak/double-video/blob/master/prewiew.png?raw=true)
+
+## Architecture
+
